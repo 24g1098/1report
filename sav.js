@@ -4,18 +4,18 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-let memos = []; // サーバー側でメモを管理するデータ構造
+let memos = []; 
 
-// Middleware
+
 app.use(express.json());
-app.use(express.static("public")); // `public`ディレクトリを静的ファイルの提供に使用
+app.use(express.static("public")); 
 
-// メモ一覧を取得
+
 app.get("/memos", (req, res) => {
   res.json(memos);
 });
 
-// メモを追加
+
 app.post("/memos", (req, res) => {
   const { text } = req.body;
   if (text) {
@@ -26,7 +26,7 @@ app.post("/memos", (req, res) => {
   }
 });
 
-// メモを削除
+
 app.post("/memos/delete", (req, res) => {
   const { index } = req.body;
   if (index >= 0 && index < memos.length) {
@@ -37,7 +37,7 @@ app.post("/memos/delete", (req, res) => {
   }
 });
 
-// サーバー起動
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

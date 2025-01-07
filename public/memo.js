@@ -1,12 +1,12 @@
 "use strict";
 
-// サーバーからメモ一覧を取得して表示
+
 async function fetchAndDisplayMemos() {
   const response = await fetch("/memos");
   const memos = await response.json();
 
   const memoList = document.getElementById("memos");
-  memoList.innerHTML = ""; // 一度リセット
+  memoList.innerHTML = ""; 
 
   memos.forEach((memo, index) => {
     const li = document.createElement("li");
@@ -25,7 +25,7 @@ async function fetchAndDisplayMemos() {
   });
 }
 
-// メモを追加
+
 async function addMemo() {
   const memoInput = document.getElementById("memo-input");
   const memoText = memoInput.value.trim();
@@ -37,11 +37,11 @@ async function addMemo() {
     body: JSON.stringify({ text: memoText }),
   });
 
-  memoInput.value = ""; // 入力欄をクリア
+  memoInput.value = ""; 
   await fetchAndDisplayMemos();
 }
 
-// メモを削除
+
 async function deleteMemo(index) {
   await fetch("/memos/delete", {
     method: "POST",
@@ -50,8 +50,8 @@ async function deleteMemo(index) {
   });
 }
 
-// イベントリスナーを設定
+
 document.getElementById("add-memo").addEventListener("click", addMemo);
 
-// 初期表示
+
 fetchAndDisplayMemos();
